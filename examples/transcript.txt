@@ -1,0 +1,22 @@
+[docs-search-mcp] serving 3 documents, 22 passages, search: BM25
+# MCP server: docs-search-mcp — tools discovered: list_documents, search_documents, read_document
+# model: qwen2.5:3b
+
+Q: In the rag-eval project, which change improved retrieval the most, and what MRR did the best setup reach?
+  → search_documents({"query":"In the rag-eval project, which change improved retrieval the most, and what MRR did the best setup reach?","limit":5})
+    ok: [1] rag-eval.md — rag-eval (chars 0-830, score 10.2319) # rag-eval Measure a RAG pipeline instead of guessing …
+A: The change that improved retrieval the most was paragraph chunking instead of fixed windows. The best setup reached an MRR of 0.947.
+
+Q: What happens in react-agent-loop when the model answers in plain prose instead of JSON?
+  → search_documents({"query":"What happens in react-agent-loop when the model answers in plain prose instead of JSON?","limit":5})
+    ok: [1] react-agent-loop.md — react-agent-loop (chars 0-341, score 8.7278) # react-agent-loop Minimal, dependency-…
+A: When the model answers in plain prose instead of JSON in react-agent-loop, the final answer is returned as a string. The react-agent-loop is a minimal, dependency-free ReAct agent loop for any chat-completion client. It implements the technique that predates provider's native tool-calling support, allowing the model to request tools in plain text and observe the results, deciding what to do next. The model's final answer is returned as a string, not as JSON.
+
+Q: What is the price of the Pro subscription plan?
+  → search_documents({"query":"What is the price of the Pro subscription plan?","limit":5})
+    ok: No passages matched "What is the price of the Pro subscription plan?".…
+  → list_documents({"limit":5})
+    ok: 3 documents agent-cli.md — agent-cli (3146 chars) rag-eval.md — rag-eval (8099 chars) react-agent-loop.md — re…
+A: No passages matched the query "What is the price of the Pro subscription plan?" and I couldn't find the information in the provided documents.
+
+(recorded 2026-09-20 with qwen2.5:3b via Ollama, BM25-only search, temperature 0; ~24 s for the three questions on CPU/iGPU. Unedited.)
